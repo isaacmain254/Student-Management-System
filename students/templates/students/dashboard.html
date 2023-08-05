@@ -1,0 +1,103 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+
+
+
+<div class="">
+    {% include 'students/search_filter.html' %}
+    <div class="container text-center">
+        <div class="row column-gap-5 ">
+            <div class="col d-flex align-items-center column-gap-4  border border-light-subtle rounded-3 "
+                style="width: fit-content;">
+                <i class="fa-solid fa-graduation-cap fa-xl"></i>
+                <div class="">
+                    <p>{{students.count}}</p>
+                    <p>Total Students</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-center column-gap-4  border border-light-subtle rounded-3 text-bg-primary "
+                style="width: fit-content;">
+                <i class="fa-regular fa-clock fa-xl"></i>
+                <div class="">
+                    <p>{{ in_session.count }}</p>
+                    <p>In Session</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-center column-gap-4  border border-light-subtle rounded-3"
+                style="width: fit-content;">
+                <i class="fa-solid fa-user fa-xl"></i>
+                <div class="">
+                    <p>{{males.count}}</p>
+                    <p>Male Students</p>
+                </div>
+            </div>
+
+            <div class="col d-flex align-items-center column-gap-4  border border-light-subtle rounded-3 "
+                style="width: fit-content;">
+                <i class="fa-solid fa-graduation-cap fa-xl"></i>
+                <div class="">
+                    <p>{{ females.count }}</p>
+                    <p>Female Students</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row column-gap-5">
+        <div class="col my-5">
+            <canvas id="barchart"></canvas>
+        </div>
+        <div class="col my-5  ">
+            <canvas id="piechart" class="w-50 h-50"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // var students_in_year = "{{student_counts}}"
+    // console.log(students_in_year)
+    const ctx = document.getElementById('barchart');
+    const pie = document.getElementById('piechart')
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['First', 'Second', 'Third', 'Fourth', 'Fifth'],
+            datasets: [{
+                label: 'Year of Study',
+                data: {{ student_counts }},
+        borderWidth: 1
+    }]
+        },
+        options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+    });
+    new Chart(pie, {
+        type: 'pie',
+        data: {
+            labels: ['First', 'Second', 'Third', 'Fourth', 'Fifth'],
+            datasets: [{
+                label: 'Year of Study',
+                data: {{ student_counts }},
+        borderWidth: 1
+    }]
+        },
+        options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+    });
+
+</script>
+{% endblock %}
