@@ -46,7 +46,8 @@
     </div>
     <div class="row column-gap-5">
         <div class="col my-5">
-            <canvas id="barchart"></canvas>
+            <canvas id="barchart" role="img"
+                aria-label="Bar chart of the number of students with respect to their year of study."></canvas>
         </div>
         <div class="col my-5  ">
             <canvas id="piechart" class="w-50 h-50"></canvas>
@@ -54,11 +55,11 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
-    // var students_in_year = "{{student_counts}}"
-    // console.log(students_in_year)
+
+    var students_in_year = JSON.parse('{{student_counts|safe|default:0}}')
+
+    console.log(typeof students_in_year)
     const ctx = document.getElementById('barchart');
     const pie = document.getElementById('piechart')
 
@@ -67,18 +68,20 @@
         data: {
             labels: ['First', 'Second', 'Third', 'Fourth', 'Fifth'],
             datasets: [{
-                label: 'Year of Study',
-                data: {{ student_counts }},
-        borderWidth: 1
-    }]
+                label: 'Number of students',
+                data: students_in_year,
+                borderWidth: 1
+            }]
         },
         options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
+            aspectRatio: 2,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+
         }
-    }
     });
     new Chart(pie, {
         type: 'pie',
@@ -86,17 +89,18 @@
             labels: ['First', 'Second', 'Third', 'Fourth', 'Fifth'],
             datasets: [{
                 label: 'Year of Study',
-                data: {{ student_counts }},
-        borderWidth: 1
-    }]
+                data: students_in_year,
+                borderWidth: 1
+            }]
         },
         options: {
-        scales: {
-            y: {
-                beginAtZero: true
+            aspectRatio: 2,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
             }
         }
-    }
     });
 
 </script>

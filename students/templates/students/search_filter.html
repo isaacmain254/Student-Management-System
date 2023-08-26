@@ -1,19 +1,27 @@
 <div class="">
-    <form class="container d-flex justify-content-between my-4 ">
-        <div class="">
-            <input type="search" class="form-control " placeholder="Search for student">
+    <form class="container d-flex justify-content-between my-4" action="{% url 'students:students_list' %}"
+        method="get">
+        <div class="d-flex gap-1">
+            <input type="text" name="q" class="form-control " placeholder="Search for student">
+            <button class="btn text-bg-primary" type="submit">Search</button>
         </div>
         <div class="d-flex align-items-center column-gap-3">
             <div>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select aria-label="Default select example">
                     <option class="text-bg-primary" selected>All students</option>
-                    <option value="1">First years</option>
-                    <option value="2">Second years</option>
+                    {% for student in students %}
+
+                    <option value={{student.year_of_study}}>Year {{student.year_of_study}}</option>
+                    <!-- <option value="2">Second years</option>
                     <option value="3">Third years</option>
                     <option value="4">Fouth years</option>
-                    <option value="5">Fifth years</option>
+                    <option value="5">Fifth years</option> -->
+                    {% endfor %}
+
                 </select>
+
             </div>
+            <button class="btn text-bg-primary" type="submit">Submit</button>
             <div class="d-inline-flex align-items-center border border-light-subtle py-2 px-3 rounded-3">
                 <span class="pe-3">Last 30 days</span>
                 <i class="fa-regular fa-calendar"></i>

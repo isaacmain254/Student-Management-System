@@ -4,10 +4,10 @@
 {% block content %}
 <div class="col-6 mx-auto mt-4">
     <h2>Add student</h2>
-    <form class="mb-5" action="{% url  'students:add'  %}" method="post">
+    <form class="mb-5" action="{% url  'students:edit_details' student.id %}" method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <button class="btn text-bg-primary mb-4" type="submit">Add student</button>
+        <button class="btn text-bg-primary mb-4" type="submit">Submit</button>
     </form>
 </div>
 

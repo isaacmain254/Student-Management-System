@@ -1,3 +1,4 @@
+<!-- search results page  -->
 {% extends 'students/base.html' %}
 
 {% block content %}
@@ -16,8 +17,8 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody class="table-group-divider">
-                {% for student in page_obj %}
+            <tbody class="">
+                {% for student in search_query %}
                 <tr class="table-secondary">
                     <th scope="row">{{ student.registration_no}}</th>
                     <td>{{student.first_name}}</td>
@@ -96,7 +97,7 @@
                 </div>
 
                 {% empty %}
-                <tr class="">
+                <tr class="table-secondary">
                     <td class="">
                         <p class="">Sorry! the student does not exist. Please try searching another
                             name!
