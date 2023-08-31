@@ -1,13 +1,14 @@
 <div class="">
     <form class="container d-flex justify-content-between my-4" action="{% url 'students:students_list' %}"
         method="get">
+        {% csrf_token %}
         <div class="d-flex gap-1">
             <input type="text" name="q" class="form-control " placeholder="Search for student">
             <button class="btn text-bg-primary" type="submit">Search</button>
         </div>
         <div class="d-flex align-items-center column-gap-3">
             <div>
-                <select class="form-select aria-label="Default select example">
+                <select class="form-select aria-label=" Default select example">
                     <option class="text-bg-primary" selected>All students</option>
                     {% for student in students %}
 
